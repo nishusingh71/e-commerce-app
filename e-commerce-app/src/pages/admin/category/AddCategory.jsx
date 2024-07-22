@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { addCategoryStart } from "../../../redux/actions/category.actions";
@@ -26,13 +26,23 @@ const AddCategory = () => {
       }, 1000);
     } else {
       setFormStatus(false);
-      for (const formControl of formData) {
+      for (const formControl of initialState) {
         formControl.touched = true;
       }
       setFormData((prevValue) => [...prevValue]);
     }
   };
+  const setDefaultValue = useCallback(() => {
+    for (const formControl of initialState) {
+      formControl.value = "";
+      formControl.touched = false;
+    }
 
+    setFormData((prevValue) => [...prevValue]);
+  }, [setFormData]);
+  useEffect(() => {
+    setDefaultValue();
+  }, [setDefaultValue]);
   return (
     <div className="card">
       <div className="card-header d-flex justify-content-between ">
@@ -49,7 +59,6 @@ const AddCategory = () => {
         )}
         <form onSubmit={submit}>
           {initialState.length > 0 &&
-            // eslint-disable-next-line array-callback-return
             initialState.map((state, index) => {
               if (state.type === "text") {
                 return (
@@ -81,6 +90,7 @@ const AddCategory = () => {
                   );
                 }
               }
+              return null;
             })}
 
           <div className="row">

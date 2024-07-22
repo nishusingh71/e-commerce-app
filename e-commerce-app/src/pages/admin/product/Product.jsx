@@ -66,7 +66,7 @@ const Product = () => {
                         {product.status === "active" ? "Active" : "Inactive"}
                       </td>
 
-                      <td>
+                      <td width={200}>
                         <Link
                           to={`/admin/product/edit/${product.id}`}
                           className="btn btn-warning me-2"

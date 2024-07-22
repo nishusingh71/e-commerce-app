@@ -3,8 +3,8 @@ import {
   addDoc,
   getDocs,
   doc,
-  deleteDoc,
   updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "../../firebaseconfig";
 
@@ -31,8 +31,8 @@ export const addProductToAPI = async (product) => {
 };
 
 export const updateProductToAPI = async (product, id) => {
-  const categoryRef = doc(db, collectionName, id);
-  await updateDoc(categoryRef, product);
+  const productRef = doc(db, collectionName, id);
+  await updateDoc(productRef, product);
 };
 
 export const deleteProductToAPI = async (id) => {

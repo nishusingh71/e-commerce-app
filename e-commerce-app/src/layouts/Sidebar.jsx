@@ -25,6 +25,11 @@ const Sidebar = () => {
           Category
         </Link>
       </li>
+      <li className="list-group-item ">
+        <Link to="/admin/user" className={styles.link}>
+          User
+        </Link>
+      </li>
     </ul>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 
-const InputText = ({ formControl, inputChange }) => {
+const InputPassword = ({ formControl, inputChange, disabled }) => {
   return (
     <div
       className={
@@ -13,7 +13,7 @@ const InputText = ({ formControl, inputChange }) => {
         {formControl.name}
       </label>
       <input
-        type="text"
+        type="password"
         id={formControl.name}
         className={
           formControl.required &&
@@ -24,6 +24,7 @@ const InputText = ({ formControl, inputChange }) => {
         }
         name={formControl.name}
         value={formControl.value}
+        disabled={disabled}
         onChange={(event) => inputChange(event, formControl)}
       />
       {formControl.required &&
@@ -35,4 +36,4 @@ const InputText = ({ formControl, inputChange }) => {
   );
 };
 
-export default InputText;
+export default InputPassword;

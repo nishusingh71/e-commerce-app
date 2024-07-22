@@ -17,7 +17,7 @@ const EditCategory = () => {
 
   let [formStatus, setFormStatus] = useState(true);
   let [formData, uploadFileStatus, setFormData, inputChange, uploadFiles] =
-    useFormData(initialState, "product");
+    useFormData(initialState, "category");
 
   const submit = (event) => {
     event.preventDefault();
@@ -34,7 +34,7 @@ const EditCategory = () => {
     } else {
       setFormStatus(false);
 
-      for (const formControl of formData) {
+      for (const formControl of initialState) {
         formControl.touched = true;
       }
 
@@ -47,7 +47,7 @@ const EditCategory = () => {
       let category = categories.find((category) => category.id === id);
 
       if (category) {
-        for (const formControl of formData) {
+        for (const formControl of initialState) {
           for (const key in category) {
             if (key === formControl.name) {
               formControl.value = category[key];
@@ -60,21 +60,18 @@ const EditCategory = () => {
         navigate("/admin/category");
       }
     },
-    [categories, formData, setFormData, navigate]
+    [categories, setFormData, navigate]
   );
 
   useEffect(() => {
     getCategoryById(id);
-  }, [id]);
+  }, [id, getCategoryById]);
 
   return (
     <div className="card">
       <div className="card-header d-flex justify-content-between ">
         <h5>Edit Category</h5>
-        <Link
-          to="/admin/category"
-          className="primary-btn"
-        >
+        <Link to="/admin/category" className="primary-btn">
           Back
         </Link>
       </div>
@@ -86,7 +83,6 @@ const EditCategory = () => {
         )}
         <form onSubmit={submit}>
           {initialState.length > 0 &&
-            // eslint-disable-next-line array-callback-return
             initialState.map((state, index) => {
               if (state.type === "text") {
                 return (
@@ -118,6 +114,7 @@ const EditCategory = () => {
                   );
                 }
               }
+              return null;
             })}
 
           <div className="row">

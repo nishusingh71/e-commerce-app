@@ -22,8 +22,8 @@ import {
 
 function* getProduct() {
   try {
-    let product = yield getProductFromAPI();
-    yield put(getProductSuccess(product));
+    let result = yield getProductFromAPI();
+    yield put(getProductSuccess(result));
   } catch (error) {
     yield put(getProductError(error.message));
   }
@@ -40,7 +40,7 @@ function* addProduct({ payload }) {
 
 function* updateProduct({ payload }) {
   try {
-    yield updateProductToAPI(payload.category, payload.id);
+    yield updateProductToAPI(payload.product, payload.id);
     yield put(getProductStart());
   } catch (error) {
     yield put(updateProductError(error.message));

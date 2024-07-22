@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormData } from "../../../customHooks/useFormData";
@@ -25,16 +25,27 @@ const AddProduct = () => {
       dispatch(addProductStart(result.modifyObject));
       setFormStatus(true);
       setTimeout(() => {
-        navigate('/admin/product')
+        navigate("/admin/product");
       }, 1000);
     } else {
       setFormStatus(false);
-      for (const formControl of formData) {
+      for (const formControl of initialState) {
         formControl.touched = true;
       }
       setFormData((prevValue) => [...prevValue]);
     }
   };
+  const setDefaultValue = useCallback(() => {
+    for (const formControl of initialState) {
+      formControl.value = "";
+      formControl.touched = false;
+    }
+
+    setFormData((prevValue) => [...prevValue]);
+  }, [setFormData]);
+  useEffect(() => {
+    setDefaultValue();
+  }, [setDefaultValue]);
 
   return (
     <div className="card">
@@ -45,9 +56,11 @@ const AddProduct = () => {
         </Link>
       </div>
       <div className="card-body">
-        {!formStatus&&<h5 className="text-danger text-center">
-          Please Enter all required Field
-        </h5>}
+        {!formStatus && (
+          <h5 className="text-danger text-center">
+            Please Enter all required Field
+          </h5>
+        )}
         <form onSubmit={submit}>
           {initialState.length > 0 &&
             initialState.map((state, index) => {
