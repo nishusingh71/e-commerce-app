@@ -1,10 +1,20 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Categories from "../../components/Categories";
 import FeaturedProducts from "../../components/FeaturedProducts";
 import LatestProductSection from "../../components/LatestProductSection";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  let currentUser = useSelector((state) => state.user.currentUser);
+
+  useEffect(() => {
+    if(!currentUser.name) {
+      navigate("/login")
+    }
+  })
   return (
     <>
       <section className="hero">

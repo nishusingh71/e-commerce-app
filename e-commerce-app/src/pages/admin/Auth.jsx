@@ -1,15 +1,19 @@
 import React, { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../../layouts/Sidebar";
 import Breadcrumb from "../../components/Breadcrum";
-import $ from "jquery";
+import { useSelector } from "react-redux";
+
 const Auth = () => {
+  const navigate = useNavigate();
+
+  let currentUser = useSelector((state) => state.user.currentUser);
+
   useEffect(() => {
-    $(".set-bg").each(function () {
-      var bg = $(this).data("setbg");
-      $(this).css("background-image", "url(" + bg + ")");
-    });
-  }, []);
+    if (!currentUser.name) {
+      navigate("/login");
+    }
+  });
   return (
     <>
       <Breadcrumb />
