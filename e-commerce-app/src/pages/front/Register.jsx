@@ -23,7 +23,9 @@ const Register = () => {
   );
   const submit = async (event) => {
     event.preventDefault();
+    console.log(formData);
     let result = modifyFormData(formData);
+    console.log(result);
     if (result.isFormValid) {
       try {
         let userCred = await createUserWithEmailAndPassword(
@@ -31,6 +33,7 @@ const Register = () => {
           result.modifyObject.email,
           result.modifyObject.password
         );
+        console.log(userCred);
         dispatch(
           addUserStart({ ...result.modifyObject, uid: userCred.user.uid })
         );

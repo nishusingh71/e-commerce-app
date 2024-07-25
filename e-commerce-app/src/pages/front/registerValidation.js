@@ -47,7 +47,7 @@ export const initialState = [{
   name: "role",
   type: "select",
   value: "Customer",
-  required: true,
+  required: false,
   description: "Please select role",
   touched: false,
   status: ""
@@ -56,7 +56,7 @@ export const initialState = [{
   name: "status",
   type: "select",
   value: "active",
-  required: true,
+  required: false,
   description: "Please select status",
   touched: false,
   status: ""
