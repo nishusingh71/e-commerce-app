@@ -11,12 +11,18 @@ import {
   getUserError,
   getUserStart,
   getUserSuccess,
+  loginUserError,
+  loginUserSuccess,
+  logoutUserError,
+  logoutUserSuccess,
   updateUserError,
 } from "../actions/user.actions";
 import {
   ADD_USER_START,
   DELETE_USER_START,
   GET_USER_START,
+  LOGIN_USER_START,
+  LOGOUT_USER_START,
   UPDATE_USER_START,
 } from "../constants/user.constants";
 
@@ -55,10 +61,26 @@ function* deleteUser({ payload }) {
     yield put(deleteUserError(error.message));
   }
 }
+function* loginUser({ payload }) {
+  try {
+    yield put(loginUserSuccess(payload));
+  } catch (error) {
+    yield put(loginUserError(error.message));
+  }
+}
 
+function* logoutUser() {
+  try {
+    yield put(logoutUserSuccess());
+  } catch (error) {
+    yield put(logoutUserError(error.message));
+  }
+}
 export default function* user() {
   yield takeLatest(GET_USER_START, getUser);
   yield takeLatest(ADD_USER_START, addUser);
   yield takeLatest(UPDATE_USER_START, updateUser);
   yield takeLatest(DELETE_USER_START, deleteUser);
+  yield takeLatest(LOGIN_USER_START, loginUser);
+  yield takeLatest(LOGOUT_USER_START, logoutUser);
 }

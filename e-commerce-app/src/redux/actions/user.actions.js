@@ -8,6 +8,12 @@ import {
   GET_USER_EROR,
   GET_USER_START,
   GET_USER_SUCCESS,
+  LOGIN_USER_ERROR,
+  LOGIN_USER_START,
+  LOGIN_USER_SUCCESS,
+  LOGOUT_USER_ERROR,
+  LOGOUT_USER_START,
+  LOGOUT_USER_SUCCESS,
   UPDATE_USER_EROR,
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
@@ -80,4 +86,33 @@ export const deleteUserSuccess = (id) => ({
 export const deleteUserError = (id) => ({
   type: DELETE_USER_EROR,
   payload: id,
+});
+// login user
+export const loginUserStart = (user) => ({
+  type: LOGIN_USER_START,
+  payload: user,
+});
+
+export const loginUserSuccess = (user) => ({
+  type: LOGIN_USER_SUCCESS,
+  payload: user,
+});
+
+export const loginUserError = (error) => ({
+  type: LOGIN_USER_ERROR,
+  payload: error,
+});
+
+// login user
+export const logoutUserStart = () => ({
+  type: LOGOUT_USER_START,
+});
+
+export const logoutUserSuccess = () => ({
+  type: LOGOUT_USER_SUCCESS,
+});
+
+export const logoutUserError = (error) => ({
+  type: LOGOUT_USER_ERROR,
+  payload: error,
 });

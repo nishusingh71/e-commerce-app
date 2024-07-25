@@ -1,9 +1,34 @@
-import { GET_USER_SUCCESS } from "../constants/user.constants";
-
+import {
+  GET_USER_SUCCESS,
+  LOGIN_USER_SUCCESS,
+  LOGOUT_USER_SUCCESS,
+} from "../constants/user.constants";
+const defaultValue = {
+  contactNumber: "",
+  email: "",
+  role: "",
+  password: "",
+  image: "",
+  status: "",
+  name: "",
+  id: "",
+};
 const initialState = {
   users: localStorage.getItem("users")
     ? JSON.parse(localStorage.getItem("users"))
     : [],
+  currentUser: localStorage.getItem("currentUser")
+    ? JSON.parse(localStorage.getItem("currentUser"))
+    : {
+        contactNumber: "",
+        email: "",
+        role: "",
+        password: "",
+        image: "",
+        status: "",
+        name: "",
+        id: "",
+      },
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -13,6 +38,21 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         users: [...action.payload],
+      };
+    case LOGIN_USER_SUCCESS:
+      localStorage.setItem("currentUser", JSON.stringify(action.payload));
+      return {
+        ...state,
+        currentUser: {
+          ...action.payload,
+        },
+      };
+
+    case LOGOUT_USER_SUCCESS:
+      localStorage.setItem("currentUser", JSON.stringify(defaultValue));
+      return {
+        ...state,
+        currentUser: { ...defaultValue },
       };
 
     default:

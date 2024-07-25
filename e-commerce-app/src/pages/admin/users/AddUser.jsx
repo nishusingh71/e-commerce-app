@@ -10,22 +10,39 @@ import InputEmail from "../../../components/ui/InputEmail";
 import FileInput from "../../../components/ui/FileInput";
 import SelectBox from "../../../components/ui/SelectBox";
 import InputPassword from "../../../components/ui/InputPassword";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../firebaseconfig";
 
 const AddUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let [formStatus, setFormStatus] = useState(true);
+  let [formStatus, setFormStatus] = useState(false);
+  let [errorMessage, setErrorMessage] = useState(
+    "Please Enter all required Field"
+  );
   let [formData, uploadFilesStatus, setFormData, inputChange, uploadFiles] =
     useFormData(initialState, "user");
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault();
     let result = modifyFormData(formData);
     if (result.isFormValid) {
-      dispatch(addUserStart(result.modifyObject));
-      setFormStatus(true);
-      setTimeout(() => {
-        navigate("/admin/user");
-      }, 1000);
+      try {
+        let userCredential = await createUserWithEmailAndPassword(
+          auth,
+          result.modifyObject.email,
+          result.modifyObject.password
+        );
+        dispatch(
+          addUserStart({ ...result.modifyObject, uid: userCredential.user.uid })
+        );
+        setFormStatus(true);
+        setTimeout(() => {
+          navigate("/admin/user");
+        }, 1000);
+      } catch (error) {
+        setFormStatus(true);
+        setErrorMessage("Email id already exists");
+      }
     } else {
       setFormStatus(false);
       for (const formControl of initialState) {
@@ -54,10 +71,8 @@ const AddUser = () => {
         </Link>
       </div>
       <div className="card-body">
-        {!formStatus && (
-          <h5 className="text-danger text-center">
-            Please Enter all required Field
-          </h5>
+        {formStatus && (
+          <h5 className="text-danger text-center">{errorMessage}</h5>
         )}
         <form onSubmit={submit}>
           {initialState.length > 0 &&

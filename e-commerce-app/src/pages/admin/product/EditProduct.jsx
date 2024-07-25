@@ -38,7 +38,7 @@ const EditProduct = () => {
     } else {
       setFormStatus(false);
 
-      for (const formControl of formData) {
+      for (const formControl of initialState) {
         formControl.touched = true;
       }
 
@@ -51,7 +51,7 @@ const EditProduct = () => {
       let product = products.find((product) => product.id === id);
 
       if (product) {
-        for (const formControl of formData) {
+        for (const formControl of initialState) {
           for (const key in product) {
             if (key === formControl.name) {
               formControl.value = product[key];
@@ -64,12 +64,12 @@ const EditProduct = () => {
         navigate("/admin/product");
       }
     },
-    [products, formData, setFormData, navigate]
+    [products, setFormData, navigate]
   );
 
   useEffect(() => {
     getProductById(id);
-  }, [id]);
+  }, [getProductById, id]);
   return (
     <div className="card">
       <div className="card-header d-flex justify-content-between ">
