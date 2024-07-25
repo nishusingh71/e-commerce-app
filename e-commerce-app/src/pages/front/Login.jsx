@@ -119,7 +119,10 @@ const Login = () => {
                       return null;
                     })}
                   <div className="d-grid">
-                    <button className="btn btn-primary py-2 text-white">
+                    <button
+                      className="primary-btn py-2 text-white"
+                      style={{ border: "none" }}
+                    >
                       Submit
                     </button>
                   </div>
@@ -127,7 +130,10 @@ const Login = () => {
               </div>
               <div className="row text-center mt-4">
                 <p>
-                  Do not have an account? <Link to="/register">Register</Link>
+                  Do not have an account?{" "}
+                  <Link to="/register" className={Styles.link}>
+                    Register
+                  </Link>
                 </p>
               </div>
             </div>

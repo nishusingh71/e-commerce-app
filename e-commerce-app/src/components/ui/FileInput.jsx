@@ -14,7 +14,7 @@ const FileInput = ({ formControl, uploadFiles }) => {
       </label>
       <input
         type="file"
-        id="image"
+        id={formControl.name}
         className={
           formControl.required &&
           formControl.touched &&
