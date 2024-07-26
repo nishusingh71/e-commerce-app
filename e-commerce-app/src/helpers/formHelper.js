@@ -9,6 +9,7 @@ export const modifyFormData = (formData) => {
           isFormValid = true;
       } else {
           isFormValid = false
+          break;
       }
   }
 

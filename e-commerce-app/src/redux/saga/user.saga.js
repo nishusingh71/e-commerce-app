@@ -15,6 +15,8 @@ import {
   loginUserSuccess,
   logoutUserError,
   logoutUserSuccess,
+  profileEditError,
+  profileEditSuccess,
   updateUserError,
 } from "../actions/user.actions";
 import {
@@ -23,6 +25,7 @@ import {
   GET_USER_START,
   LOGIN_USER_START,
   LOGOUT_USER_START,
+  PROFILE_EDIT_START,
   UPDATE_USER_START,
 } from "../constants/user.constants";
 
@@ -50,6 +53,16 @@ function* updateUser({ payload }) {
     yield put(getUserStart());
   } catch (error) {
     yield put(updateUserError(error.message));
+  }
+}
+
+function* profileEdit({ payload }) {
+  try {
+    yield updateUserToAPI(payload.user, payload.id);
+    yield put(getUserStart());
+    yield put(profileEditSuccess(payload.user));
+  } catch (error) {
+    yield put(profileEditError(error.message));
   }
 }
 
@@ -83,4 +96,5 @@ export default function* user() {
   yield takeLatest(DELETE_USER_START, deleteUser);
   yield takeLatest(LOGIN_USER_START, loginUser);
   yield takeLatest(LOGOUT_USER_START, logoutUser);
+  yield takeLatest(PROFILE_EDIT_START, profileEdit);
 }

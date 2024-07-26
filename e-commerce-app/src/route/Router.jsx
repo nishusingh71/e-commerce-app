@@ -52,7 +52,7 @@ const Router = () => {
           <Route path="dashboard" element={<DashBoard />} />
 
           {/* profile edit page */}
-          <Route path="edit-profile" element={<ProfileEdit />} />
+          <Route path="editprofile" element={<ProfileEdit />} />
 
           {/* order page */}
           <Route path="order">

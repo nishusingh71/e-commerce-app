@@ -14,6 +14,9 @@ import {
   LOGOUT_USER_ERROR,
   LOGOUT_USER_START,
   LOGOUT_USER_SUCCESS,
+  PROFILE_EDIT_ERROR,
+  PROFILE_EDIT_START,
+  PROFILE_EDIT_SUCCESS,
   UPDATE_USER_EROR,
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
@@ -114,5 +117,24 @@ export const logoutUserSuccess = () => ({
 
 export const logoutUserError = (error) => ({
   type: LOGOUT_USER_ERROR,
+  payload: error,
+});
+
+// profile edit
+export const profileEditStart = (user, id) => ({
+  type: PROFILE_EDIT_START,
+  payload: {
+    user,
+    id,
+  },
+});
+
+export const profileEditSuccess = (user, id) => ({
+  type: PROFILE_EDIT_SUCCESS,
+  payload: { user},
+});
+
+export const profileEditError = (error) => ({
+  type: PROFILE_EDIT_ERROR,
   payload: error,
 });
