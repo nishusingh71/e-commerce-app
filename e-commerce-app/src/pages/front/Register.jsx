@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormData } from "../../customHooks/useFormData";
-import { initialState } from "./registerValidation";
 import { modifyFormData } from "../../helpers/formHelper";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebaseconfig";
@@ -12,42 +11,42 @@ import Styles from "./LoginForm.module.css";
 import InputText from "../../components/ui/InputText";
 import InputEmail from "../../components/ui/InputEmail";
 import InputPassword from "../../components/ui/InputPassword";
+import { initialState } from "./registerValid";
 
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let [formStatus, setFormStatus] = useState(true);
+  let [formStatus, setFormStatus] = useState(false);
   let [formData, , setFormData, inputChange] = useFormData(initialState, "");
   let [errorMessage, setErrorMessage] = useState(
     "please Enter all required Field"
   );
   const submit = async (event) => {
     event.preventDefault();
-    console.log(formData);
     let result = modifyFormData(formData);
     console.log(result);
     if (result.isFormValid) {
+      console.log(result);
       try {
         let userCred = await createUserWithEmailAndPassword(
           auth,
           result.modifyObject.email,
           result.modifyObject.password
         );
-        console.log(userCred);
         dispatch(
           addUserStart({ ...result.modifyObject, uid: userCred.user.uid })
         );
-        setFormStatus(true);
+        setFormStatus(false);
         setFormData([...initialState]);
         setTimeout(() => {
           navigate("/login");
         }, 1000);
       } catch (error) {
-        setFormStatus(false);
+        setFormStatus(true);
         setErrorMessage("Email id already exists");
       }
     } else {
-      setFormStatus(true);
+      setFormStatus(false);
       for (const formControl of formData) {
         formControl.touched = true;
       }
@@ -76,7 +75,7 @@ const Register = () => {
               </div>
               <div className="row">
                 <form className="form-group" onSubmit={submit}>
-                  {!formStatus && (
+                  {formStatus && (
                     <h5 className="text-danger text-center">{errorMessage}</h5>
                   )}
                   {initialState.length > 0 &&

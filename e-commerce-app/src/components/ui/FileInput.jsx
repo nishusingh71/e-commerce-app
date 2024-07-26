@@ -6,7 +6,7 @@ const FileInput = ({ formControl, uploadFiles }) => {
       className={
         formControl.required && formControl.touched && formControl.value === ""
           ? "form-group mb-4 text-danger"
-          : "form-group mb-4 "
+          : "form-group mb-4"
       }
     >
       <label htmlFor={formControl.name} className="mb-2">
@@ -20,12 +20,10 @@ const FileInput = ({ formControl, uploadFiles }) => {
           formControl.touched &&
           formControl.value === ""
             ? "form-control border-danger"
-            : "form-control "
+            : "form-control"
         }
-        name={formControl.name}
         onChange={(event) => uploadFiles(event, formControl)}
       />
-
       {formControl.value && (
         <div className="mt-2">
           <img src={formControl.value} alt="" height={"50px"} />

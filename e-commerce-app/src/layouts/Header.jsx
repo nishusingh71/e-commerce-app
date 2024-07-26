@@ -14,15 +14,14 @@ const Header = () => {
       {/* <!-- Humberger Begin --> */}
       <div className="humberger__menu__overlay"></div>
       <div className="humberger__menu__wrapper">
-        {!currentUser.name | currentUser.name && (
-          <>
-            <div className="humberger__menu__logo">
-              <Link to="#">
-                <img src="img/logo.png" alt="" />
-              </Link>
-            </div>
-          </>
-        )}
+        <>
+          <div className="humberger__menu__logo">
+            <Link to="#">
+              <img src="img/logo.png" alt="" />
+            </Link>
+          </div>
+        </>
+
         {currentUser.name && (
           <>
             <div className="humberger__menu__cart">
@@ -71,8 +70,24 @@ const Header = () => {
           {currentUser.name && (
             <>
               <div className="header__top__right__auth">
-                <Link to="#">
-                  <i className="fa fa-user"></i>
+                <Link to="#" style={{ fontSize: "12sp" }}>
+                  <div
+                    style={{
+                      borderRadius: "50%",
+                      overflow: "hidden",
+                      width: "50px",
+                      height: "50px",
+                    }}
+                  >
+                    <img
+                      src={currentUser.image}
+                      alt={currentUser.name}
+                      style={{
+                        objectFit: "contain",
+                      }}
+                    />
+                  </div>
+                  {currentUser.name}
                 </Link>
               </div>
             </>
@@ -201,8 +216,24 @@ const Header = () => {
                   {currentUser.name && (
                     <>
                       <div className="header__top__right__auth">
-                        <Link to="#">
-                          <i className="fa fa-user"></i>
+                        <Link to="#" style={{ fontSize: "12sp" }}>
+                          <div
+                            style={{
+                              borderRadius: "50%",
+                              overflow: "hidden",
+                              width: "30px",
+                              height: "30px",
+                            }}
+                          >
+                            <img
+                              src={currentUser.image}
+                              alt={currentUser.name}
+                              style={{
+                                objectFit: "contain",
+                              }}
+                            />
+                          </div>
+                          {currentUser.name}
                         </Link>
                       </div>
                     </>
@@ -215,11 +246,13 @@ const Header = () => {
         <div className="container">
           <div className="row">
             <div className="col-lg-3">
-              <div className="header__logo">
-                <Link to="/">
-                  <img src="img/logo.png" alt="" />
-                </Link>
-              </div>
+              <>
+                <div className="header__logo">
+                  <Link to="/">
+                    <img src="img/logo.png" alt="" />
+                  </Link>
+                </div>
+              </>
             </div>
             <div className="col-lg-6">
               <nav className="header__menu">

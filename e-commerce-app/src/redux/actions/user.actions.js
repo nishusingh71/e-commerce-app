@@ -103,7 +103,7 @@ export const loginUserError = (error) => ({
   payload: error,
 });
 
-// login user
+// logout user
 export const logoutUserStart = () => ({
   type: LOGOUT_USER_START,
 });

@@ -25,7 +25,9 @@ const AddUser = () => {
   const submit = async (event) => {
     event.preventDefault();
     let result = modifyFormData(formData);
+    console.log(result);
     if (result.isFormValid) {
+      console.log(result);
       try {
         let userCredential = await createUserWithEmailAndPassword(
           auth,

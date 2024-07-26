@@ -6,7 +6,7 @@ const InputText = ({ formControl, inputChange }) => {
       className={
         formControl.required && formControl.touched && formControl.value === ""
           ? "form-group mb-4 text-danger"
-          : "form-group mb-4 "
+          : "form-group mb-4"
       }
     >
       <label htmlFor={formControl.name} className="mb-2">
@@ -20,7 +20,7 @@ const InputText = ({ formControl, inputChange }) => {
           formControl.touched &&
           formControl.value === ""
             ? "form-control border-danger"
-            : "form-control "
+            : "form-control"
         }
         name={formControl.name}
         value={formControl.value}
