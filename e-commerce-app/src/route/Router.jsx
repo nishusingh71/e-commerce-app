@@ -7,7 +7,6 @@ import Cart from "../pages/front/Cart";
 import Checkout from "../pages/front/Checkout";
 import ProductDetails from "../pages/front/ProductDetails";
 import Auth from "../pages/admin/Auth";
-import DashBoard from "../pages/admin/dashboard/DashBoard";
 import ProfileEdit from "../pages/admin/dashboard/ProfileEdit";
 import Order from "../pages/admin/order/Order";
 import OrderView from "../pages/admin/order/OrderView";
@@ -21,6 +20,7 @@ import User from "../pages/admin/users/User";
 import AddUser from "../pages/admin/users/AddUser";
 import EditUser from "../pages/admin/users/EditUser";
 import PageNotFound from "../pages/front/PageNotFound";
+import Dashboard from "../pages/admin/dashboard/Dashboard";
 
 const Router = () => {
   return (
@@ -48,12 +48,11 @@ const Router = () => {
 
         {/* Admin Route */}
         <Route path="/admin" element={<Auth />}>
-          {/* dashboard page */}
-          <Route path="" element={<DashBoard />} />
+        {/* dashboard page */}
+        <Route path='dashboard' element={<Dashboard/>} />
 
-          {/* profile edit page */}
-          <Route path="editprofile" element={<ProfileEdit />} />
-
+        {/* profile edit page */}
+        <Route path='edit-profile' element={<ProfileEdit />} />
           {/* order page */}
           <Route path="order">
             {/* order list page */}
