@@ -12,8 +12,8 @@ const DashBoard = () => {
         <div className="card-header d-flex justify-content-between">
           <h5>Dashboard</h5>
           <Link
-            to={`/admin/editprofile`}
-            className="primary-btn"
+            to='editprofile'
+            className="btn primary-btn"
           >
             Edit Profile
           </Link>

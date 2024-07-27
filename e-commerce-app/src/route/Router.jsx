@@ -49,7 +49,7 @@ const Router = () => {
         {/* Admin Route */}
         <Route path="/admin" element={<Auth />}>
           {/* dashboard page */}
-          <Route path="dashboard" element={<DashBoard />} />
+          <Route path="" element={<DashBoard />} />
 
           {/* profile edit page */}
           <Route path="editprofile" element={<ProfileEdit />} />
