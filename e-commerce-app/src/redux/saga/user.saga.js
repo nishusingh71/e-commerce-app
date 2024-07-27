@@ -56,16 +56,6 @@ function* updateUser({ payload }) {
   }
 }
 
-function* profileEdit({ payload }) {
-  try {
-    yield updateUserToAPI(payload.user, payload.id);
-    yield put(getUserStart());
-    yield put(profileEditSuccess(payload.user));
-  } catch (error) {
-    yield put(profileEditError(error.message));
-  }
-}
-
 function* deleteUser({ payload }) {
   try {
     yield deleteUserToAPI(payload);
@@ -87,6 +77,15 @@ function* logoutUser() {
     yield put(logoutUserSuccess());
   } catch (error) {
     yield put(logoutUserError(error.message));
+  }
+}
+function* profileEdit({ payload }) {
+  try {
+    yield updateUserToAPI(payload.user, payload.id);
+    yield put(getUserStart());
+    yield put(profileEditSuccess(payload.user));
+  } catch (error) {
+    yield put(profileEditError(error.message));
   }
 }
 export default function* user() {

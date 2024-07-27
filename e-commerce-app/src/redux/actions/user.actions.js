@@ -129,9 +129,9 @@ export const profileEditStart = (user, id) => ({
   },
 });
 
-export const profileEditSuccess = (user, id) => ({
+export const profileEditSuccess = (user) => ({
   type: PROFILE_EDIT_SUCCESS,
-  payload: { user},
+  payload: user,
 });
 
 export const profileEditError = (error) => ({
