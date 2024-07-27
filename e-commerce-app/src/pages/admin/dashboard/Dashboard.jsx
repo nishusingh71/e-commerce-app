@@ -2,13 +2,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const DashBoard = () => {
+const Dashboard = () => {
   let currentUser = useSelector((state) => state.user.currentUser);
   return (
     <div className="card mb-5">
       <div className="card-header d-flex justify-content-between">
         <h5>Dashboard</h5>
-        <Link to="/admin/dashboard/edit-profile" className="primary-btn">
+        <Link to="/admin/edit-profile" className="primary-btn">
           Edit Profile
         </Link>
       </div>
@@ -28,4 +28,4 @@ const DashBoard = () => {
   );
 };
 
-export default DashBoard;
+export default Dashboard;

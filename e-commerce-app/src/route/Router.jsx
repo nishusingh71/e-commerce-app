@@ -20,7 +20,7 @@ import User from "../pages/admin/users/User";
 import AddUser from "../pages/admin/users/AddUser";
 import EditUser from "../pages/admin/users/EditUser";
 import PageNotFound from "../pages/front/PageNotFound";
-import Dashboard from "../pages/admin/dashboard/Dashboard";
+import Dashboard from "../pages/admin/dashboard/DashBoard";
 
 const Router = () => {
   return (
@@ -48,11 +48,11 @@ const Router = () => {
 
         {/* Admin Route */}
         <Route path="/admin" element={<Auth />}>
-        {/* dashboard page */}
-        <Route path='dashboard' element={<Dashboard/>} />
+          {/* dashboard page */}
+          <Route path="dashboard" element={<Dashboard />} />
 
-        {/* profile edit page */}
-        <Route path='edit-profile' element={<ProfileEdit />} />
+          {/* profile edit page */}
+          <Route path="edit-profile" element={<ProfileEdit />} />
           {/* order page */}
           <Route path="order">
             {/* order list page */}
