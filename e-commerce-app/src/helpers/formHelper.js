@@ -1,20 +1,23 @@
 export const modifyFormData = (formData) => {
-  let modifyObject = {}
+  let modifyObject = {};
   let isFormValid = false;
 
-  for (const formControl of formData) {
-      modifyObject[formControl.name] = formControl.value
+  console.log(formData);
 
-      if (formControl.required && formControl.value) {
-          isFormValid = true;
-      } else {
-          isFormValid = false
-          break;
-      }
+  for (const formControl of formData) {
+    modifyObject[formControl.name] = formControl.value;
+
+    console.log(formControl);
+    console.log(formControl.required && formControl.value !== "");
+    if (formControl.required && formControl.value !== "") {
+      isFormValid = true;
+    } else {
+      isFormValid = false;
+    }
   }
 
   return {
-      isFormValid,
-      modifyObject
-  }
-}
+    isFormValid,
+    modifyObject,
+  };
+};

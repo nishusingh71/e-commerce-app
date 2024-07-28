@@ -1,23 +1,23 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { initialState } from "./profileEditValidation";
 import { useFormData } from "../../../customHooks/useFormData";
+import { initialState } from "./profileEditValidation";
 import { modifyFormData } from "../../../helpers/formHelper";
+import { editProfileStart } from "../../../redux/actions/user.actions";
 import InputText from "../../../components/ui/InputText";
-import InputEmail from "../../../components/ui/InputEmail";
 import FileInput from "../../../components/ui/FileInput";
-import { profileEditStart } from "../../../redux/actions/user.actions";
+import InputEmail from "../../../components/ui/InputEmail";
 
 const ProfileEdit = () => {
-  let currentUser = useSelector((state) => state.user.users);
+  let currentUser = useSelector((state) => state.user.currentUser);
   let users = useSelector((state) => state.user.users);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   let [formStatus, setFormStatus] = useState(true);
-  let [formData, uploadFilesStatus, setFormData, inputChange, uploadFiles] =
-    useFormData(initialState, "user");
+  let [formData, uploadFileStatus, setFormData, inputChange, uploadFiles] =
+    useFormData([...initialState], "user");
 
   const submit = (event) => {
     event.preventDefault();
@@ -25,13 +25,14 @@ const ProfileEdit = () => {
 
     if (result.isFormValid) {
       dispatch(
-        profileEditStart(
+        editProfileStart(
           { ...result.modifyObject, id: currentUser.id },
           currentUser.id
         )
       );
 
       setFormStatus(true);
+
       setFormData(initialState);
 
       setTimeout(() => {
@@ -40,7 +41,7 @@ const ProfileEdit = () => {
     } else {
       setFormStatus(false);
 
-      for (const formControl of initialState) {
+      for (const formControl of formData) {
         formControl.touched = true;
       }
 
@@ -73,8 +74,11 @@ const ProfileEdit = () => {
   return (
     <div className="card">
       <div className="card-header d-flex justify-content-between ">
-        <h5>Edit User</h5>
-        <Link to="/admin/dashboard" className="primary-btn">
+        <h5>Profile Edit</h5>
+        <Link
+          to="/admin/dashboard"
+          className="primary-btn  text-white"
+        >
           Back
         </Link>
       </div>
@@ -96,6 +100,17 @@ const ProfileEdit = () => {
                   />
                 );
               }
+
+              if (state.type === "file") {
+                return (
+                  <FileInput
+                    formControl={state}
+                    uploadFiles={uploadFiles}
+                    key={index}
+                  />
+                );
+              }
+
               if (state.type === "email") {
                 return (
                   <InputEmail
@@ -103,15 +118,6 @@ const ProfileEdit = () => {
                     inputChange={inputChange}
                     key={index}
                     disabled={true}
-                  />
-                );
-              }
-              if (state.type === "file") {
-                return (
-                  <FileInput
-                    formControl={state}
-                    uploadFiles={uploadFiles}
-                    key={index}
                   />
                 );
               }
@@ -123,9 +129,9 @@ const ProfileEdit = () => {
             <div className="col-sm-6 d-grid">
               <button
                 type="submit"
-                className="primary-btn"
-                style={{ border: "none" }}
-                disabled={uploadFilesStatus}
+                className="primary-btn  text-white"
+                disabled={uploadFileStatus}
+                style={{border:'none'}}
               >
                 Submit
               </button>
@@ -134,7 +140,7 @@ const ProfileEdit = () => {
               <button
                 type="reset"
                 className="btn btn-warning text-white"
-                disabled={uploadFilesStatus}
+                disabled={uploadFileStatus}
               >
                 Reset
               </button>

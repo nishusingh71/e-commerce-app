@@ -35,7 +35,7 @@ export const initialState = [{
   status: ""
 },
 {
-  name: "contactNumber",
+  name: "contact",
   type: "text",
   value: "",
   required: true,

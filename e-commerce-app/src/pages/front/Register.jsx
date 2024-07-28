@@ -11,13 +11,13 @@ import Styles from "./LoginForm.module.css";
 import InputText from "../../components/ui/InputText";
 import InputEmail from "../../components/ui/InputEmail";
 import InputPassword from "../../components/ui/InputPassword";
-import { initialState } from "./registerValid";
+import { initialStatereg } from "./registerValid";
 
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let [formStatus, setFormStatus] = useState(false);
-  let [formData, , setFormData, inputChange] = useFormData(initialState, "");
+  let [formStatus, setFormStatus] = useState(true);
+  let [formData, , setFormData, inputChange] = useFormData(initialStatereg, "");
   let [errorMessage, setErrorMessage] = useState(
     "please Enter all required Field"
   );
@@ -26,35 +26,35 @@ const Register = () => {
     let result = modifyFormData(formData);
     console.log(result);
     if (result.isFormValid) {
-      console.log(result);
+      console.log(result.isFormValid);
       try {
-        let userCred = await createUserWithEmailAndPassword(
+        let userCredential = await createUserWithEmailAndPassword(
           auth,
           result.modifyObject.email,
           result.modifyObject.password
         );
         dispatch(
-          addUserStart({ ...result.modifyObject, uid: userCred.user.uid })
+          addUserStart({ ...result.modifyObject, uid: userCredential.user.uid })
         );
-        setFormStatus(false);
-        setFormData([...initialState]);
+        setFormStatus(true);
+        setFormData([...initialStatereg]);
         setTimeout(() => {
           navigate("/login");
         }, 1000);
       } catch (error) {
-        setFormStatus(true);
+        setFormStatus(false);
         setErrorMessage("Email id already exists");
       }
     } else {
-      setFormStatus(false);
-      for (const formControl of formData) {
+      setFormStatus(true);
+      for (const formControl of initialStatereg) {
         formControl.touched = true;
       }
       setFormData((prevValue) => [...prevValue]);
     }
   };
   const setDefaultValue = useCallback(() => {
-    for (const formControl of initialState) {
+    for (const formControl of initialStatereg) {
       formControl.value = "";
       formControl.touched = false;
     }
@@ -75,11 +75,11 @@ const Register = () => {
               </div>
               <div className="row">
                 <form className="form-group" onSubmit={submit}>
-                  {formStatus && (
+                  {!formStatus && (
                     <h5 className="text-danger text-center">{errorMessage}</h5>
                   )}
-                  {initialState.length > 0 &&
-                    initialState.map((state, index) => {
+                  {initialStatereg.length > 0 &&
+                    initialStatereg.map((state, index) => {
                       if (state.name === "name") {
                         return (
                           <InputText

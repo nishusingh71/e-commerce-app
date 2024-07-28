@@ -1,11 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Sidebar.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebaseconfig";
 import { logoutUserStart } from "../redux/actions/user.actions";
 const Sidebar = () => {
+  let currentUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -36,21 +37,25 @@ const Sidebar = () => {
           Order
         </Link>
       </li>
-      <li className="list-group-item ">
-        <Link to="/admin/product" className={styles.link}>
-          Product
-        </Link>
-      </li>
-      <li className="list-group-item ">
-        <Link to="/admin/category" className={styles.link}>
-          Category
-        </Link>
-      </li>
-      <li className="list-group-item ">
-        <Link to="/admin/user" className={styles.link}>
-          User
-        </Link>
-      </li>
+      {currentUser.role.toLowerCase() === "admin" && (
+        <>
+          <li className="list-group-item">
+            <Link to="/admin/product" className={styles.link}>
+              Product
+            </Link>
+          </li>
+          <li className="list-group-item">
+            <Link to="/admin/category" className={styles.link}>
+              Category
+            </Link>
+          </li>
+          <li className="list-group-item">
+            <Link to="/admin/user" className={styles.link}>
+              User
+            </Link>
+          </li>
+        </>
+      )}
       <li className="list-group-item ">
         <Link to="#" className={styles.link} onClick={logout}>
           Logout

@@ -121,20 +121,20 @@ export const logoutUserError = (error) => ({
 });
 
 // profile edit
-export const profileEditStart = (user, id) => ({
+export const editProfileStart = (user, id) => ({
   type: PROFILE_EDIT_START,
   payload: {
-    user,
-    id,
-  },
-});
+      user,
+      id
+  }
+})
 
-export const profileEditSuccess = (user) => ({
+export const editProfileSuccess = (user) => ({
   type: PROFILE_EDIT_SUCCESS,
-  payload: user,
-});
+  payload: user
+})
 
-export const profileEditError = (error) => ({
+export const editProfileError = (error) => ({
   type: PROFILE_EDIT_ERROR,
-  payload: error,
-});
+  payload: error
+})

@@ -8,6 +8,7 @@ import {
 import {
   addUserError,
   deleteUserError,
+  editProfileSuccess,
   getUserError,
   getUserStart,
   getUserSuccess,
@@ -15,8 +16,6 @@ import {
   loginUserSuccess,
   logoutUserError,
   logoutUserSuccess,
-  profileEditError,
-  profileEditSuccess,
   updateUserError,
 } from "../actions/user.actions";
 import {
@@ -79,21 +78,22 @@ function* logoutUser() {
     yield put(logoutUserError(error.message));
   }
 }
-function* profileEdit({ payload }) {
+function* editProfile({
+  payload
+}) {
   try {
-    yield updateUserToAPI(payload.user, payload.id);
-    yield put(getUserStart());
-    yield put(profileEditSuccess(payload.user));
+      yield updateUserToAPI(payload.user, payload.id)
+      yield put(getUserStart())
+      yield put(editProfileSuccess(payload.user))
   } catch (error) {
-    yield put(profileEditError(error.message));
+      yield put(updateUserError(error.message))
   }
-}
-export default function* user() {
+}export default function* user() {
   yield takeLatest(GET_USER_START, getUser);
   yield takeLatest(ADD_USER_START, addUser);
   yield takeLatest(UPDATE_USER_START, updateUser);
   yield takeLatest(DELETE_USER_START, deleteUser);
   yield takeLatest(LOGIN_USER_START, loginUser);
   yield takeLatest(LOGOUT_USER_START, logoutUser);
-  yield takeLatest(PROFILE_EDIT_START, profileEdit);
+  yield takeLatest(PROFILE_EDIT_START, editProfile);
 }
