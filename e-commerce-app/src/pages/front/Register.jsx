@@ -12,12 +12,17 @@ import InputText from "../../components/ui/InputText";
 import InputEmail from "../../components/ui/InputEmail";
 import InputPassword from "../../components/ui/InputPassword";
 import { initialStatereg } from "./registerValid";
+import FileInput from "../../components/ui/FileInput";
+import SelectBox from "../../components/ui/SelectBox";
 
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let [formStatus, setFormStatus] = useState(true);
-  let [formData, , setFormData, inputChange] = useFormData(initialStatereg, "");
+  let [formData, , setFormData, inputChange, uploadFiles] = useFormData(
+    initialStatereg,
+    "user"
+  );
   let [errorMessage, setErrorMessage] = useState(
     "please Enter all required Field"
   );
@@ -80,7 +85,7 @@ const Register = () => {
                   )}
                   {initialStatereg.length > 0 &&
                     initialStatereg.map((state, index) => {
-                      if (state.name === "name") {
+                      if (state.type === "text") {
                         return (
                           <InputText
                             formControl={state}
@@ -89,7 +94,7 @@ const Register = () => {
                           />
                         );
                       }
-                      if (state.name === "email") {
+                      if (state.type === "email") {
                         return (
                           <InputEmail
                             formControl={state}
@@ -98,7 +103,7 @@ const Register = () => {
                           />
                         );
                       }
-                      if (state.name === "password") {
+                      if (state.type === "password") {
                         return (
                           <InputPassword
                             formControl={state}
@@ -106,6 +111,40 @@ const Register = () => {
                             key={index}
                           />
                         );
+                      }
+                      if (state.type === "file") {
+                        return (
+                          <FileInput
+                            formControl={state}
+                            uploadFiles={uploadFiles}
+                            key={index}
+                          />
+                        );
+                      }
+                      if (state.type === "select") {
+                        if (state.name === "status") {
+                          return (
+                            <SelectBox
+                              formControl={state}
+                              inputChange={inputChange}
+                              values={[
+                                { name: "active" },
+                                { name: "inactive" },
+                              ]}
+                              key={index}
+                            />
+                          );
+                        }
+                        if (state.name === "role") {
+                          return (
+                            <SelectBox
+                              formControl={state}
+                              inputChange={inputChange}
+                              values={[{ name: "admin" }, { name: "customer" }]}
+                              key={index}
+                            />
+                          );
+                        }
                       }
                       return null;
                     })}

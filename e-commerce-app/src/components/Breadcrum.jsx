@@ -53,7 +53,7 @@ const Breadcrumb = () => {
                     if (segment === index) {
                       return (
                         <React.Fragment key={index}>
-                          <Link to="#">{segment}</Link>
+                          <Link to="/">{segment}</Link>
                         </React.Fragment>
                       );
                     }

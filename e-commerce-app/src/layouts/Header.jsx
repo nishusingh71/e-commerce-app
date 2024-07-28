@@ -1,9 +1,23 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { getCategoryStart } from "../redux/actions/category.actions";
 
 const Header = () => {
-  let currentUser = useSelector((state) => state.user.currentUser);
+  
+  const categories = useSelector((state) => state.category.categories);
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
+  const getCategory = useCallback(() => {
+    dispatch(getCategoryStart());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (categories.length !== 0) {
+      getCategory();
+    }
+  }, [categories.length, getCategory]);
+
   return (
     <>
       {/* <!-- Page Preloder --> */}
@@ -32,7 +46,7 @@ const Header = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="#">
+                  <Link to="/cart">
                     <i className="fa fa-shopping-bag"></i> <span>3</span>
                   </Link>
                 </li>
@@ -70,13 +84,18 @@ const Header = () => {
           {currentUser.name && (
             <>
               <div className="header__top__right__auth">
-                <Link to="#" style={{ fontSize: "12sp" }}>
+                <Link
+                  to="/admin/dashboard"
+                  style={{ fontSize: "12sp" }}
+                  className="text-center mt-2"
+                >
                   <div
                     style={{
                       borderRadius: "50%",
                       overflow: "hidden",
                       width: "50px",
                       height: "50px",
+                      justifyContent: "center",
                     }}
                   >
                     <img
@@ -216,13 +235,18 @@ const Header = () => {
                   {currentUser.name && (
                     <>
                       <div className="header__top__right__auth">
-                        <Link to="#" style={{ fontSize: "12sp" }}>
+                        <Link
+                          to="/admin/dashboard"
+                          style={{ fontSize: "12sp" }}
+                          className="text-center mt-2"
+                        >
                           <div
                             style={{
                               borderRadius: "50%",
                               overflow: "hidden",
                               width: "30px",
                               height: "30px",
+                              justifyContent: "center",
                             }}
                           >
                             <img
@@ -294,7 +318,7 @@ const Header = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link to="#">
+                        <Link to="/cart">
                           <i className="fa fa-shopping-bag"></i> <span>3</span>
                         </Link>
                       </li>
@@ -327,39 +351,13 @@ const Header = () => {
                       <span>All departments</span>
                     </div>
                     <ul>
-                      <li>
-                        <Link to="#">Fresh Meat</Link>
-                      </li>
-                      <li>
-                        <Link to="#">Vegetables</Link>
-                      </li>
-                      <li>
-                        <Link to="#">Fruit & Nut Gifts</Link>
-                      </li>
-                      <li>
-                        <Link to="#">Fresh Berries</Link>
-                      </li>
-                      <li>
-                        <Link to="#">Ocean Foods</Link>
-                      </li>
-                      <li>
-                        <Link to="#">Butter & Eggs</Link>
-                      </li>
-                      <li>
-                        <Link to="#">Fastfood</Link>
-                      </li>
-                      <li>
-                        <Link to="#">Fresh Onion</Link>
-                      </li>
-                      <li>
-                        <Link to="#">Papayaya & Crisps</Link>
-                      </li>
-                      <li>
-                        <Link to="#">Oatmeal</Link>
-                      </li>
-                      <li>
-                        <Link to="#">Fresh Bananas</Link>
-                      </li>
+                      {categories.length > 0 &&
+                        categories.map((c, i) => (
+                          <li key={i} className="mt-2">
+                            {/* <img src={c.image} alt={c.name} height={50} /> */}
+                            <Link to="#">{c.name}</Link>
+                          </li>
+                        ))}
                     </ul>
                   </div>
                 </div>
