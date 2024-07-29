@@ -11,16 +11,16 @@ import Styles from "./LoginForm.module.css";
 import InputText from "../../components/ui/InputText";
 import InputEmail from "../../components/ui/InputEmail";
 import InputPassword from "../../components/ui/InputPassword";
-import { initialStatereg } from "./registerValid";
 import FileInput from "../../components/ui/FileInput";
 import SelectBox from "../../components/ui/SelectBox";
+import { initialState } from "./registerValidation";
 
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let [formStatus, setFormStatus] = useState(true);
   let [formData, , setFormData, inputChange, uploadFiles] = useFormData(
-    initialStatereg,
+    initialState,
     "user"
   );
   let [errorMessage, setErrorMessage] = useState(
@@ -42,7 +42,7 @@ const Register = () => {
           addUserStart({ ...result.modifyObject, uid: userCredential.user.uid })
         );
         setFormStatus(true);
-        setFormData([...initialStatereg]);
+        setFormData([...initialState]);
         setTimeout(() => {
           navigate("/login");
         }, 1000);
@@ -52,14 +52,14 @@ const Register = () => {
       }
     } else {
       setFormStatus(true);
-      for (const formControl of initialStatereg) {
+      for (const formControl of initialState) {
         formControl.touched = true;
       }
       setFormData((prevValue) => [...prevValue]);
     }
   };
   const setDefaultValue = useCallback(() => {
-    for (const formControl of initialStatereg) {
+    for (const formControl of initialState) {
       formControl.value = "";
       formControl.touched = false;
     }
@@ -83,8 +83,8 @@ const Register = () => {
                   {!formStatus && (
                     <h5 className="text-danger text-center">{errorMessage}</h5>
                   )}
-                  {initialStatereg.length > 0 &&
-                    initialStatereg.map((state, index) => {
+                  {initialState.length > 0 &&
+                    initialState.map((state, index) => {
                       if (state.type === "text") {
                         return (
                           <InputText

@@ -1,4 +1,4 @@
-export const initialStatereg = [
+export const initialState = [
   {
     name: "name",
     type: "text",
@@ -12,7 +12,7 @@ export const initialStatereg = [
     name: "image",
     type: "file",
     value: "",
-    required: false,
+    required: true,
     description: "Please select image",
     touched: false,
     status: ""
@@ -39,7 +39,7 @@ export const initialStatereg = [
     name: "contact",
     type: "text",
     value: "",
-    required: false,
+    required: true,
     description: "Please enter your contact number",
     touched: false,
     status: ""
@@ -48,7 +48,7 @@ export const initialStatereg = [
     name: "role",
     type: "select",
     value: "customer",
-    required: false,
+    required: true,
     description: "Please select role",
     touched: false,
     status: ""
@@ -57,7 +57,7 @@ export const initialStatereg = [
     name: "status",
     type: "select",
     value: "active",
-    required: false,
+    required: true,
     description: "Please select status",
     touched: false,
     status: ""

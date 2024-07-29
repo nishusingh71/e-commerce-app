@@ -21,6 +21,7 @@ import AddUser from "../pages/admin/users/AddUser";
 import EditUser from "../pages/admin/users/EditUser";
 import PageNotFound from "../pages/front/PageNotFound";
 import Dashboard from "../pages/admin/dashboard/DashBoard";
+import ThankYou from "../pages/front/ThankYou";
 
 const Router = () => {
   return (
@@ -32,7 +33,7 @@ const Router = () => {
         <Route path="/" element={<Home />} />
 
         {/* product details page */}
-        <Route path="/product-details" element={<ProductDetails />} />
+        <Route path="/product-details/:id" element={<ProductDetails />} />
 
         {/* cart page  */}
         <Route path="/cart" element={<Cart />} />
@@ -45,6 +46,8 @@ const Router = () => {
 
         {/* register page */}
         <Route path="/register" element={<Register />} />
+        {/* Thank You Page */}
+        <Route path="/thankyou" element={<ThankYou />} />
 
         {/* Admin Route */}
         <Route path="/admin" element={<Auth />}>

@@ -27,6 +27,7 @@
     });
     if ($(".featured__filter").length > 0) {
       var containerEl = document.querySelector(".featured__filter");
+      // eslint-disable-next-line no-undef
       var mixer = mixitup(containerEl);
     }
   });
@@ -227,4 +228,5 @@
       $button.parent().find("input").val(newVal);
     });
   }, 1000);
+// eslint-disable-next-line no-undef
 })(jQuery);
