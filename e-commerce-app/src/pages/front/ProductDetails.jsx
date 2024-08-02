@@ -7,14 +7,14 @@ import { getProductStart } from "../../redux/actions/product.actions";
 const ProductDetails = () => {
   let products = useSelector((state) => state.product.products);
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { slug } = useParams();
   useEffect(() => {
-    if (!products.find((product) => product.id === id)) {
-      dispatch(getProductStart(id));
+    if (!products.find((product) => product.slug === slug)) {
+      dispatch(getProductStart(slug));
     }
-  }, [id, products, dispatch]);
+  }, [slug, products, dispatch]);
 
-  const product = products.find((product) => product.id === id);
+  const product = products.find((product) => product.slug=== slug);
 
   if (!product) {
     return <div>Loading...</div>;
@@ -30,10 +30,9 @@ const ProductDetails = () => {
               <div className="product__details__pic">
                 <div className="product__details__pic__item">
                   <img
-                    className="product__details__pic__item--large"
+                    className="product__details__pic__item"
                     src={product.image}
                     alt={product.name}
-                    height={500}
                   />
                 </div>
               </div>
@@ -65,6 +64,10 @@ const ProductDetails = () => {
                   </li>
                   <li>
                     <b>Weight</b> <span>{product.weight}</span>
+                  </li>
+                  <li>
+                    <b>Quantity</b>
+                    <span>{product.quantity}</span>
                   </li>
                   <li>
                     <b>Status</b>

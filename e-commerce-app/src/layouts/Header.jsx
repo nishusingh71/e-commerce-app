@@ -40,11 +40,6 @@ const Header = () => {
             <div className="humberger__menu__cart">
               <ul>
                 <li>
-                  <Link to="#">
-                    <i className="fa fa-heart"></i> <span>1</span>
-                  </Link>
-                </li>
-                <li>
                   <Link to="/cart">
                     <i className="fa fa-shopping-bag"></i> <span>3</span>
                   </Link>
@@ -202,12 +197,6 @@ const Header = () => {
             <div className="col-lg-6">
               <nav className="header__menu">
                 <ul className="d-flex justify-content-center">
-                  {/* <li>
-                    <NavLink to="/">Home</NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="/product-details">Product</NavLink>
-                  </li> */}
                   {!currentUser.name && (
                     <>
                       <li>
@@ -222,9 +211,6 @@ const Header = () => {
                       </li>
                     </>
                   )}
-                  {/* <li>
-                    <NavLink to="/admin">Contact</NavLink>
-                  </li> */}
                 </ul>
               </nav>
             </div>
@@ -233,11 +219,6 @@ const Header = () => {
                 <>
                   <div className="header__cart">
                     <ul>
-                      <li>
-                        <Link to="#">
-                          <i className="fa fa-heart"></i> <span>1</span>
-                        </Link>
-                      </li>
                       <li>
                         <Link to="/cart">
                           <i className="fa fa-shopping-bag"></i> <span>3</span>
@@ -257,36 +238,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      {/* <!-- Header Section End --> */}
-
-      {/* <!-- Hero Section Begin --> */}
-      <section className="hero hero-normal">
-        {currentUser.name && (
-          <>
-            <div className="container">
-              <div className="row">
-                <div className="col-lg-3">
-                  <div className="hero__categories">
-                    <div className="hero__categories__all">
-                      <i className="fa fa-bars"></i>
-                      <span>All categories</span>
-                    </div>
-                    <ul>
-                      {categories.length > 0 &&
-                        categories.map((c, i) => (
-                          <li key={i} className="mt-2">
-                            {/* <img src={c.image} alt={c.name} height={50} /> */}
-                            <Link to="#">{c.name}</Link>
-                          </li>
-                        ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-      </section>
+      
     </>
   );
 };
