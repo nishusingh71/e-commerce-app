@@ -13,6 +13,7 @@ const Home = () => {
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
   };
+  
 
   const filteredProducts =
     selectedCategory === "All"

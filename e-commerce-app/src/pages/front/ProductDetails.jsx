@@ -14,11 +14,7 @@ const ProductDetails = () => {
     }
   }, [slug, products, dispatch]);
 
-  const product = products.find((product) => product.slug=== slug);
-
-  if (!product) {
-    return <div>Loading...</div>;
-  }
+  const product = products.find((product) => product.slug === slug);
 
   return (
     <>
